@@ -26,3 +26,10 @@ steps:
     targetPath: 'dist/dist.zip'
     artifact: 'UnicoreDemo'
     publishLocation: 'pipeline'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'ProWorks-Gary-VSPro(da49ee5f-dd7a-47a9-8abe-7279fc1dce3a)'
+    appType: 'webAppLinux'
+    WebAppName: 'benjamin-unicore-gridsome-app'
+    packageForLinux: 'dist/dist.zip'
