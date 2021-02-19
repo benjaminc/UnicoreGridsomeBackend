@@ -19,6 +19,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
+    arguments: '-o ..\dist'
     modifyOutputPath: false
 - script: dir
   displayName: 'Run a one-line script'
