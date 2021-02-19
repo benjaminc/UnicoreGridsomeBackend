@@ -12,6 +12,11 @@ pool:
 steps:
 - task: DotNetCoreCLI@2
   inputs:
+    command: 'custom'
+    custom: 'nuget'
+    arguments: 'add source "https://www.myget.org/F/umbracoprereleases/api/v3/index.json" -n "Umbraco Prereleases"'
+- task: DotNetCoreCLI@2
+  inputs:
     command: 'publish'
     publishWebProjects: true
     modifyOutputPath: false
