@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Azure.Storage.Blobs" Version="12.8.0" />
         <PackageReference Include="Umbraco.Cms" Version="0.5.0-alpha002" />
     </ItemGroup>
 

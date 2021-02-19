@@ -34,6 +34,8 @@ namespace UnicoreDemo
         {
             var umbracoBuilder = services.AddUmbraco(_env, _config);
             umbracoBuilder.BuildWithAllBackOfficeComponents();
+            services.AddHostedService<FrontEndBuild>();
+            services.AddHostedService<MediaUpdate>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
