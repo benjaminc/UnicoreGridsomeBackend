@@ -6,3 +6,6 @@ node_modules/
 obj/
 *.user
 *.suo
+umbraco/
+wwwroot/
+config/
