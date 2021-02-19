@@ -21,5 +21,10 @@ steps:
     publishWebProjects: true
     arguments: '-o dist'
     modifyOutputPath: false
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'dist/dist.zip'
+    artifact: 'UnicoreDemo'
+    publishLocation: 'pipeline'
 - script: find .
   displayName: 'Run a one-line script'
