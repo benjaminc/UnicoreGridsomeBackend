@@ -26,5 +26,3 @@ steps:
     targetPath: 'dist/dist.zip'
     artifact: 'UnicoreDemo'
     publishLocation: 'pipeline'
-- script: find .
-  displayName: 'Run a one-line script'
