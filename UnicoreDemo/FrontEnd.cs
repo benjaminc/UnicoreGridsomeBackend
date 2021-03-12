@@ -34,11 +34,19 @@ public class FrontEndBuild : IHostedService
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
+        if (_webhookUrl == null)
+        {
+            _logger.LogWarning("No build trigger URL defined");
+            return Task.CompletedTask;
+        }
+
         ContentService.Deleted += TriggerBuild;
         ContentService.Moved += TriggerBuild;
         ContentService.Published += TriggerBuild;
         ContentService.Trashed += TriggerBuild;
         ContentService.Unpublished += TriggerBuild;
+
+        _logger.LogInformation("Initializing Front-end build trigger with:\r\n    URI: {uri}\r\n    Headers: {headers}\r\n    Body: {body}", _webhookUrl, _headers, _body);
 
         return Task.CompletedTask;
     }
@@ -75,8 +83,17 @@ public class FrontEndBuild : IHostedService
 
                 if (content != null) message.Content = content;
 
-                _logger.LogInformation("Triggering front-end build request");
-                await client.SendAsync(message);
+                var response = await client.SendAsync(message);
+                var body = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    _logger.LogInformation("Successfully triggered a front-end build request with {code} result: {body}", response.StatusCode, body);
+                }
+                else
+                {
+                    _logger.LogError("Could not successfully trigger a front-end build request. It return {code} with a body of {response}", response.StatusCode, body);
+                }
             }
         }
         catch (Exception ex)

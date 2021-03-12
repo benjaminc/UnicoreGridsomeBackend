@@ -5,6 +5,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="App_Data\**" />
+      <Content Remove="App_Data\**" />
+      <EmbeddedResource Remove="App_Data\**" />
+      <None Remove="App_Data\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Algolia.Search" Version="6.9.1" />
         <PackageReference Include="Azure.Storage.Blobs" Version="12.8.0" />
         <PackageReference Include="Umbraco.Cms" Version="0.5.0-alpha002" />
     </ItemGroup>

@@ -35,6 +35,12 @@ public class MediaUpdate : IHostedService
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
+        if (string.IsNullOrEmpty(_storageConnectionString))
+        {
+            _logger.LogWarning("No media storage connection defined");
+            return Task.CompletedTask;
+        }
+
         MediaService.Saved += MediaService_Saved;
         return Task.CompletedTask;
     }
